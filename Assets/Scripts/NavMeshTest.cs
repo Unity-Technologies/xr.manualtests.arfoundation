@@ -80,12 +80,13 @@ public class NavMeshTest : MonoBehaviour
                     else
                     {
                         Debug.LogError("No appropriate navmesh position found");
+                        DestroyImmediate(spawnedObject);
                     }
                 }
                 else
                 {
                     spawnedObject.GetComponent<NavMeshAgent>().destination = m_RaycastHits[0].pose.position;
-                    Debug.Log("Moving to m_RaycastHits[0].pose.position");
+                    Debug.Log(string.Format("Moving to: {0}", m_RaycastHits[0].pose.position));
                 }
             }
         }
@@ -116,7 +117,7 @@ public class NavMeshTest : MonoBehaviour
 
     void PlaneUpdatedHandler(ARPlaneUpdatedEventArgs args)
     {
-        //UpdatePlane(args.plane.gameObject);
+        UpdatePlane(args.plane.gameObject);
         args.plane.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
@@ -127,6 +128,6 @@ public class NavMeshTest : MonoBehaviour
 
     void UpdatePlane(GameObject plane)
     {
-        //plane.transform.localScale += new Vector3(1f, 0f, 1f);
+
     }
 }
