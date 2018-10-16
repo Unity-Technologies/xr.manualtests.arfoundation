@@ -78,10 +78,12 @@ public class TestSelectionScript : MonoBehaviour
                 break;
             case ("RefPointTest"):
                 description = "\n<size=40>Description:</size>" +
-                    "\n Add reference points to a scene through touch and verify they are \n saved correctly." +
+                    "\n Add reference points to a scene through touch and delete them." +
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
-                    "\n 1) This test is currently being re-designed and is not valid";
+                    "\n 1) Find a plane and tap to place Pose reference points" +
+                    "\n 2) Use drop down to switch to Plane reference points and tap \n on plane to add" +
+                    "\n 3) Press delete button to remove all reference points. If any \n remain, check log for errors.";
                 break;
             case ("PlaneVideoPlayerTest"):
                 description = "\n<size=40>Description:</size>" +

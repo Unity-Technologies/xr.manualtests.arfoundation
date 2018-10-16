@@ -50,7 +50,6 @@ LightmapSettings:
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
-    m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
@@ -172,7 +171,8 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 8419c191d799ebf48afcf1ec2ef82661, type: 3}
 --- !u!1 &72173950 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1162956612933934, guid: 8419c191d799ebf48afcf1ec2ef82661, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1162956612933934, guid: 8419c191d799ebf48afcf1ec2ef82661,
+    type: 3}
   m_PrefabInstance: {fileID: 72173949}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &72173951
@@ -187,7 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 1731544365209272, guid: 7c64250c128347d49b76116d3aa816d6, type: 3}
+  m_PointCloudPrefab: {fileID: 1731544365209272, guid: 7c64250c128347d49b76116d3aa816d6,
+    type: 3}
 --- !u!114 &72173952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 1227219725743516, guid: 2e1a7d1e1deb9ca4cbf39b2514169263, type: 3}
+  m_PlanePrefab: {fileID: 1227219725743516, guid: 2e1a7d1e1deb9ca4cbf39b2514169263,
+    type: 3}
 --- !u!114 &72173953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad83498c19aa9c4fb56ceb4b8e9a3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObjectToPlace: {fileID: 1957194126376612, guid: 31b9dbf6594b84d68948b38b9e282f05, type: 3}
+  m_ObjectToPlace: {fileID: 100000, guid: 5bdba25d1d07e5e499afbb79c89eb67a, type: 3}
 --- !u!1001 &225341762
 PrefabInstance:
   m_ObjectHideFlags: 0
