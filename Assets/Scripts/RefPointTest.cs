@@ -3,26 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
+using UnityEngine.UI;
+
 
 [RequireComponent(typeof(ARReferencePointManager))]
 public class RefPointTest : MonoBehaviour
 {
+    enum ReferencePointType
+    {
+        Pose,
+        Plane,
+        None
+    };
+
     [SerializeField]
-    private GameObject m_ObjectToPlace;
+    private GameObject m_PoseObject;
     [SerializeField]
-    private Material m_BadRefPointMaterial;
+    private GameObject m_PlaneObject;
+    [SerializeField]
+    private Dropdown refPointDropDown;
+
+    private ReferencePointType currentRefPointType = ReferencePointType.None;
 
     private ARReferencePointManager m_RefManager;
     private ARSessionOrigin m_Origin;
+    private ARPlaneManager m_planeManager;
     private List<ARReferencePoint> m_TrackableIds = new List<ARReferencePoint>();
     private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
-    private List<Pose> m_raycastHitPoses = new List<Pose>();
+    private Dictionary<ARReferencePoint, GameObject> m_pointDictionary = new Dictionary<ARReferencePoint, GameObject>();
 
     // Use this for initialization
     void Start()
     {
         m_RefManager = GetComponent<ARReferencePointManager>();
         m_Origin = GetComponent<ARSessionOrigin>();
+
+        refPointDropDown.onValueChanged.AddListener(delegate
+        {
+            DropdownValueChanged(refPointDropDown);
+        });
+
+        m_planeManager = gameObject.GetComponent<ARPlaneManager>();
+
+        refPointDropDown.RefreshShownValue();
+        currentRefPointType = (ReferencePointType)refPointDropDown.value;
     }
     
     // Update is called once per frame
@@ -34,59 +58,88 @@ public class RefPointTest : MonoBehaviour
         if (m_Origin.camera == null)
             return;
         
-        if (m_ObjectToPlace == null)
+        if (m_PoseObject == null || m_PlaneObject == null)
             return;
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            // Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            // if (m_Session.Raycast(ray, m_RaycastHits, TrackableType.PlaneWithinPolygon))
             if (m_Origin.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
             {
+
                 Debug.LogFormat("Hit Position: {0}", m_RaycastHits[0].pose);
 
-                m_TrackableIds.Add(m_RefManager.TryAddReferencePoint(m_RaycastHits[0].pose));
-                m_raycastHitPoses.Add(m_RaycastHits[0].pose);
+                switch (currentRefPointType)
+                {
+                    case ReferencePointType.Pose:
+                        {
+                            Debug.Log("Adding Pose Reference Point");
 
-                //m_ObjectToPlace.transform.position = m_RaycastHits[0].Pose.position;
+                            ARReferencePoint tempPoint = m_RefManager.TryAddReferencePoint(m_RaycastHits[0].pose);
+                            m_pointDictionary.Add(tempPoint, Instantiate(m_PoseObject, m_RaycastHits[0].pose.position, m_RaycastHits[0].pose.rotation));
+                            m_TrackableIds.Add(tempPoint);
 
-                //var pos = new Vector3(m_ObjectToPlace.transform.position.x, m_ObjectToPlace.transform.position.y + 0.05f,
-                //    m_ObjectToPlace.transform.position.z);
+                            return;
+                        }
+                    case ReferencePointType.Plane:
+                        {
+                            Debug.Log("Adding Plane Reference Point");
 
-                //m_ObjectToPlace.transform.position = pos;
-                //m_ObjectToPlace.transform.rotation = m_RaycastHits[0].Pose.rotation;
+                            TrackableId tempId = m_RaycastHits[0].trackableId;
+                            ARPlane tempPlane = m_planeManager.TryGetPlane(tempId);
+
+                            ARReferencePoint tempPoint = m_RefManager.TryAttachReferencePoint(tempPlane, m_RaycastHits[0].pose);
+                            m_pointDictionary.Add(tempPoint, Instantiate(m_PlaneObject, m_RaycastHits[0].pose.position, m_RaycastHits[0].pose.rotation));
+
+                            return;
+                        }
+                    case ReferencePointType.None:
+                        {
+                            Debug.Log("No ReferencePointType selected");
+                            return;
+                        }
+                    default:
+                        {
+                            Debug.Log("ReferencePointType is unknown");
+                            break;
+                        }
+                }
             }
         }
     }
 
-    public void TestReferencePoints()
+    void DropdownValueChanged(Dropdown change)
     {
-        List<ARReferencePoint> referencePoints = new List<ARReferencePoint>();
-        m_RefManager.GetAllReferencePoints(referencePoints);
+        currentRefPointType = (ReferencePointType)change.value;
+        refPointDropDown.RefreshShownValue();
+    }
 
-        bool match = false;
-        foreach (ARReferencePoint reference in referencePoints)
+    public void DeleteAllReferencePoints()
+    {
+        Debug.Log("Removing all reference points");
+
+        bool refPointRemoved;
+        List<ARReferencePoint> tempTrackableList = new List<ARReferencePoint>(m_TrackableIds);
+
+        foreach(ARReferencePoint point in tempTrackableList)
         {
-            match = false;
-            Debug.LogFormat("ReferencePoint Position: {0}", reference.transform.position.ToString());
+            refPointRemoved = m_RefManager.TryRemoveReferencePoint(point);
 
-            foreach(Pose raycastPose in m_raycastHitPoses)
+            if (!refPointRemoved)
             {
-                Debug.LogFormat("RaycastHit Position: {0}", raycastPose.position.ToString());
-                
-
-                if(reference.transform.position == raycastPose.position)
-                {
-                    Instantiate(m_ObjectToPlace, reference.transform.position, reference.transform.rotation);
-                    match = true;
-                    break;
-                }
+                Debug.Log("Reference Point not removed");
             }
-
-            if(!match)
+            else
             {
-                GameObject badRefObject = Instantiate(m_ObjectToPlace, reference.transform.position, reference.transform.rotation);
-                badRefObject.GetComponent<Renderer>().material = m_BadRefPointMaterial;
+                GameObject pointObject;
+                if(m_pointDictionary.TryGetValue(point, out pointObject))
+                {
+                    m_TrackableIds.Remove(point);
+                    Destroy(pointObject);
+                }
+                else
+                {
+                    Debug.Log("Could not find GameObject value using ARReferencePoint key");
+                }
             }
         }
     }
