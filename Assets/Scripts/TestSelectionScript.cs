@@ -103,6 +103,12 @@ public class TestSelectionScript : MonoBehaviour
                     "\n 1) Planes are detected" +
                     "\n 2) Tapping on plane places a game object that faces the screen";
                 break;
+            case ("CameraImageApiTester"):
+                description = "\n<size=40>Description:</size>" +
+                    "\n Automated CameraApiTest." +
+                    "\n\n" +
+                    "\n<size=40>Test is UNDER CONSTRUCTION and currently NON-FUNCTIONAL</size>";
+                break;
             default:
                 description = "\n<size=26>Description:</size>" +
                     "\n A Description for this test is not yet available";

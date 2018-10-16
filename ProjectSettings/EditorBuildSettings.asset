@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PoseTrackingTest.unity
     guid: 5a573065c5ced7244814686fd7e2ff5d
   - enabled: 1
-    path: Assets/Scenes/ShootingStars.unity
+    path: Assets/Scenes/ARParticles.unity
     guid: 4d1dfd75e60995144bc9d493134ec7f1
   - enabled: 1
     path: Assets/Scenes/SimpleARTest.unity
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlaneDetectionTest.unity
     guid: a1fbd3791f34edc46bd3173170c35df2
+  - enabled: 1
+    path: Assets/Scenes/CameraImageApiTester.unity
+    guid: 442cedb49766af641b008f76347ac2b5
   m_configObjects: {}
