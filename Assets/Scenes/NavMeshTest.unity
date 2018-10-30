@@ -139,6 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 231397020}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -158,6 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 231397020}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -217,6 +219,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114050928222700728, guid: 8419c191d799ebf48afcf1ec2ef82661,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 485525508}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8419c191d799ebf48afcf1ec2ef82661, type: 3}
 --- !u!1 &485525504 stripped
@@ -234,6 +241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 485525504}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: c6e2217fbf9df4a119f90e23a4de1920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -247,6 +255,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 485525504}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -261,11 +270,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 485525504}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 1227219725743516, guid: 2e1a7d1e1deb9ca4cbf39b2514169263,
     type: 3}
+--- !u!20 &485525508 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20991988118006612, guid: 8419c191d799ebf48afcf1ec2ef82661,
+    type: 3}
+  m_PrefabInstance: {fileID: 485525503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &499481170
 GameObject:
   m_ObjectHideFlags: 0

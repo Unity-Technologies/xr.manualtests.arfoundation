@@ -167,6 +167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AR Rig
       objectReference: {fileID: 0}
+    - target: {fileID: 114050928222700728, guid: 8419c191d799ebf48afcf1ec2ef82661,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 72173954}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8419c191d799ebf48afcf1ec2ef82661, type: 3}
 --- !u!1 &72173950 stripped
@@ -184,6 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 72173950}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -198,6 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 72173950}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -212,10 +219,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 72173950}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: aad83498c19aa9c4fb56ceb4b8e9a3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ObjectToPlace: {fileID: 100000, guid: 5bdba25d1d07e5e499afbb79c89eb67a, type: 3}
+--- !u!20 &72173954 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20991988118006612, guid: 8419c191d799ebf48afcf1ec2ef82661,
+    type: 3}
+  m_PrefabInstance: {fileID: 72173949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &225341762
 PrefabInstance:
   m_ObjectHideFlags: 0
