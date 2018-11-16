@@ -42,12 +42,15 @@ public class SubrectSelector : MonoBehaviour
     {
         SetPosition(Vector3.zero);
     }
+	
+	Vector3 m_Position;
 
     void Update()
     {
         if (Input.GetMouseButton(0))
-            SetPosition(Input.mousePosition);
-
+			m_Position = Input.mousePosition;
+		
+		SetPosition(m_Position);
         DrawRect();
     }
 

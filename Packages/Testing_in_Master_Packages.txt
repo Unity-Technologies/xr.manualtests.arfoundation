@@ -1,0 +1,42 @@
+When testing in master branch of ARCore/ARExtensions/ARFoundation/ARKit, use the commands below to grab the git:
+(Do this within the Packages folder)
+
+git clone https://github.com/Unity-Technologies/upm-xr-arcore.git com.unity.xr.arcore
+
+
+
+git clone https://github.com/Unity-Technologies/upm-xr-arkit.git com.unity.xr.arkit
+
+
+
+git clone git@github.cds.internal.unity3d.com:unity/com.unity.xr.arextensions.git com.unity.xr.arextensions
+
+
+
+git clone git@github.cds.internal.unity3d.com:unity/com.unity.xr.arfoundation.git com.unity.xr.arfoundation
+
+
+
+
+Then within your Manifest replace the current xr.ar extensions with the file locations:
+
+"com.unity.xr.arcore": "file:/com.unity.xr.arcore",
+    
+"com.unity.xr.arextensions": "file:/com.unity.xr.arextentions",
+    
+"com.unity.xr.arfoundation": "file:/com.unity.xr.arfoundation",
+    
+"com.unity.xr.arkit": "file:/com.unity.xr.arkit",
+
+
+
+For returning to previous extensions move the git cloned package folders and change the manifest back to the previous versions:
+(Note: these may be out of date later so please update in package manager within editor before further testing)
+
+"com.unity.xr.arcore": "1.0.0-preview.23",
+    
+"com.unity.xr.arextensions": "1.0.0-preview.6",
+    
+"com.unity.xr.arfoundation": "1.0.0-preview.20",
+    
+"com.unity.xr.arkit": "1.0.0-preview.17",

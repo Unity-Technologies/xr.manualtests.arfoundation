@@ -101,17 +101,22 @@ public class TestSelectionScript : MonoBehaviour
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
                     "\n 1) Planes are detected" +
-                    "\n 2) Tapping on plane places a game object that faces the screen";
-                break;
-            case ("CameraImageApiTester"):
-                description = "\n<size=40>Description:</size>" +
-                    "\n Automated CameraApiTest." +
-                    "\n\n" +
-                    "\n<size=40>Test is UNDER CONSTRUCTION and currently NON-FUNCTIONAL</size>";
+					"\n 2) Tapping on plane places a game object that faces the screen" +
+                    "\n 3) Tapping on the 'toggle plane' button enables and disables plane creation";
                 break;
             default:
                 description = "\n<size=26>Description:</size>" +
                     "\n A Description for this test is not yet available";
+                break;
+            case ("CameraImageApiTester"):
+                description = "\n<size=40>Description:</size>" +
+                    "\n Automated CameraApiTest" +
+                    "\n\n" +
+                    "\n<size=40>What to Verify:</size>" +
+                    "\n 1) Top right text says PASS" +
+                    "\n 2) Test begins cycling through different camera types" +
+                    "\n 3) Test runs for about 1 minutes and 30 seconds" +
+                    "\n 4) When test finishes, the subrect camera will leave a red ghost";
                 break;
         }
 
