@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Experimental.XR;
+using UnityEngine.AI;
 using UnityEngine.XR.ARFoundation;
 
 [RequireComponent(typeof(ARSessionOrigin))]
@@ -56,7 +57,6 @@ public class NavMeshTest : MonoBehaviour
                 {
                     Debug.Log(m_RaycastHits[0].pose.ToString());
                     spawnedObject = Instantiate(m_ObjectToPlace, m_RaycastHits[0].pose.position, m_RaycastHits[0].pose.rotation);
-                    spawnedObject.transform.localScale = new Vector3(.2f, .2f, .2f);
 
                     NavMeshHit closestHit;
                     if (NavMesh.SamplePosition(m_RaycastHits[0].pose.position, out closestHit, 1.0f, NavMesh.AllAreas))
@@ -65,7 +65,7 @@ public class NavMeshTest : MonoBehaviour
 
                         spawnedObject.transform.position = closestHit.position;
                         spawnedObject.AddComponent<NavMeshAgent>();
-                        //spawnedObject.GetComponent<NavMeshAgent>().radius = .01f;
+                        //spawnedObject.GetComponent<NavMeshAgent>().radius = .1f;
                         spawnedObject.GetComponent<NavMeshAgent>().Warp(m_RaycastHits[0].pose.position);
                         if (spawnedObject.GetComponent<NavMeshAgent>().isOnNavMesh == true)
                         {
@@ -111,16 +111,8 @@ public class NavMeshTest : MonoBehaviour
     {
         UpdatePlane(args.plane.gameObject);
         args.plane.gameObject.AddComponent<NavMeshSurface>();
-        //args.plane.gameObject.GetComponent<NavMeshSurface>().overrideVoxelSize = true;
-        //args.plane.gameObject.GetComponent<NavMeshSurface>().voxelSize = 6;
-        args.plane.gameObject.GetComponent<NavMeshSurface>().overrideTileSize = true;
-        args.plane.gameObject.GetComponent<NavMeshSurface>().tileSize = 64;
-        Debug.Log(string.Format("NavMesh Voxel Size: {0}", args.plane.gameObject.GetComponent<NavMeshSurface>().voxelSize));
-        Debug.Log(string.Format("NavMesh Tile Size: {0}", args.plane.gameObject.GetComponent<NavMeshSurface>().tileSize));
         args.plane.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
-        Debug.Log(string.Format("Plane Scale: {0}", args.plane.gameObject.transform.localScale));
-        Debug.Log(string.Format("Plane Pose: {0}", args.plane.gameObject.transform.position));
-        Debug.Log(string.Format("NavMesh Source Bounds: {0}", args.plane.gameObject.GetComponent<NavMeshSurface>().navMeshData.sourceBounds.ToString()));
+        Debug.Log(args.plane.gameObject.GetComponent<NavMeshSurface>().navMeshData.sourceBounds.ToString());
     }
 
     void PlaneUpdatedHandler(ARPlaneUpdatedEventArgs args)

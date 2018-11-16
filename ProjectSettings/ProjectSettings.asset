@@ -8,7 +8,7 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
-  defaultScreenOrientation: 3
+  defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -160,7 +160,7 @@ PlayerSettings:
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
-  AndroidTargetSdkVersion: 27
+  AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 0
@@ -369,7 +369,7 @@ PlayerSettings:
     m_Automatic: 0
   - m_BuildTarget: AndroidPlayer
     m_APIs: 0b000000
-    m_Automatic: 1
+    m_Automatic: 0
   m_BuildTargetVRSettings:
   - m_BuildTarget: iOS
     m_Enabled: 0
@@ -614,30 +614,30 @@ PlayerSettings:
   webGLCompressionFormat: 1
   webGLLinkerTarget: 0
   webGLThreadsSupport: 0
+  webGLWasmStreaming: 0
   scriptingDefineSymbols: {}
   platformArchitecture: {}
-  scriptingBackend:
-    Android: 0
+  scriptingBackend: {}
   il2cppCompilerConfiguration:
     iOS: 0
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 1
   additionalIl2CppArgs: 
-  scriptingRuntimeVersion: 1
+  scriptingRuntimeVersion: 0
   gcIncremental: 0
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: XRSDKTest
+  metroPackageName: ARFoundationTest
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: XRSDKTest
+  metroApplicationDescription: ARFoundationTest
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -707,12 +707,12 @@ PlayerSettings:
   facebookStatus: 1
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
-  apiCompatibilityLevel: 6
+  apiCompatibilityLevel: 2
   cloudProjectId: 6d588f0b-a567-4f40-bab5-105a703e5017
   framebufferDepthMemorylessMode: 0
-  projectName: XRSDKTest
+  projectName: ARFoundationTest
   organizationId: thep3000
   cloudEnabled: 0
-  enableNativePlatformBackendsForNewInputSystem: 0
+  enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 0
   legacyClampBlendShapeWeights: 1

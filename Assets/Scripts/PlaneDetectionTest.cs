@@ -42,7 +42,7 @@ public class PlaneDetectionTest : MonoBehaviour
                 m_ObjectToPlace.transform.position = pos;
 
                 GameObject placedOjbect = Instantiate(m_ObjectToPlace, m_RaycastHits[0].pose.position, m_RaycastHits[0].pose.rotation);
-                placedOjbect.transform.Translate(0, 0.2f, 0, Space.Self);
+                placedOjbect.transform.Rotate(-90, 0, 90, Space.Self);
             }
         }
     }
