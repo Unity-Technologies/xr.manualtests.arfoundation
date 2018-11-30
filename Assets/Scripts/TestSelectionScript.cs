@@ -33,11 +33,13 @@ public class TestSelectionScript : MonoBehaviour
         {
             case ("SimpleARTest"):
                 description = "\n<size=40>Description:</size>" +
-                    "\n View a simple game object in augmented reality." +
+                    "\n View a simple game object in augmented reality and test Auto Focus" +
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
                     "\n 1) Moving the device updates the camera feed" +
-                    "\n 2) Can walk around and view game object from different angles";
+                    "\n 2) Can walk around and view game object from different angles" +
+                    "\n 3) Can switch between Fixed and Auto camera focus modes" +
+                    "\n 3+) Easiest to tell focus with object directly focused in front of camera";
                 break;
             case ("PoseTrackingTest"):
                 description = "\n<size=40>Description:</size>" +
@@ -100,9 +102,12 @@ public class TestSelectionScript : MonoBehaviour
                     "\n Find a plane and place game objects on them." +
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
-                    "\n 1) Planes are detected" +
+                    "\n 1) Vertical and Horizontal planes are detected" +
 					"\n 2) Tapping on plane places a game object that faces the screen" +
-                    "\n 3) Tapping on the 'toggle plane' button enables and disables plane creation";
+                    "\n 3) Tapping on the 'toggle plane' button enables and disables plane creation" +
+                    "\n 4) Toggle the plane detection drop down -" +
+                    "\n 5) Vertical option only finds vertical planes, Horizontal only finds Horizontal planes" +
+                    "\n 6) None option destroys all planes and game objects";
                 break;
             default:
                 description = "\n<size=26>Description:</size>" +
