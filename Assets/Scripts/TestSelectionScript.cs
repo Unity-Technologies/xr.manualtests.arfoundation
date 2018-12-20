@@ -14,7 +14,9 @@ public class TestSelectionScript : MonoBehaviour
         ARParticles,
         NavMesh,
         RefPointTest,
-        PlaneVideoPlayer
+        PlaneVideoPlayer,
+        CameraImageApiTester,
+        ImageResolutionTest
     }
 
     public Canvas m_DescriptionCanvas;
@@ -122,6 +124,14 @@ public class TestSelectionScript : MonoBehaviour
                     "\n 2) Test begins cycling through different camera types" +
                     "\n 3) Test runs for about 1 minutes and 30 seconds" +
                     "\n 4) When test finishes, the subrect camera will leave a red ghost";
+                break;
+            case ("ImageResolutionTest"):
+                description = "\n<size=40>Description:</size>" +
+                    "\n Switch resolutions and ensure device handles them" +
+                    "\n\n" +
+                    "\n<size=40>What to Verify:</size>" +
+                    "\n 1) Click Camera Config and switch resolutions" +
+                    "\n 2) Click Camera Image button to ensure resolution changed";
                 break;
         }
 
