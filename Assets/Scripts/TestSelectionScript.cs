@@ -133,6 +133,14 @@ public class TestSelectionScript : MonoBehaviour
                     "\n 1) Click Camera Config and switch resolutions" +
                     "\n 2) Click Camera Image button to ensure resolution changed";
                 break;
+            case ("EnvironmentProbeScene"):
+                description = "\n<size=40>Description:</size>" +
+                    "\n Ensure environment probes are present on planes" +
+                    "\n\n" +
+                    "\n<size=40>What to Verify:</size>" +
+                    "\n ANDROID) Planes appear and cubes can be put on planes" +
+                    "\n iOS) Planes and Probes appear, and cubes can be put on planes";
+                break;
         }
 
         m_MenuCanvas.gameObject.SetActive(false);
