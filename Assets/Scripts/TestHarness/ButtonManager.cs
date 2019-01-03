@@ -71,7 +71,7 @@ public static class ButtonManager
     public static void OnGUI()
     {
         m_X = 0;
-        m_Y = 0;
+        m_Y = 100;
         m_LastFrame = Time.frameCount;
         EnsureButtonStyleExists();
     }
