@@ -38,7 +38,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ImageResolutionTest.unity
     guid: 80155df80078edd49917c7c56af919be
-  - enabled: 1
-    path: Assets/Scenes/EnvironmentProbeScene.unity
-    guid: 7e565304eae984d83a2a4b2950b00691
   m_configObjects: {}
