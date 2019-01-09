@@ -14,7 +14,9 @@ public class TestSelectionScript : MonoBehaviour
         ARParticles,
         NavMesh,
         RefPointTest,
-        PlaneVideoPlayer
+        PlaneVideoPlayer,
+        CameraImageApiTester,
+        ImageResolutionTest
     }
 
     public Canvas m_DescriptionCanvas;
@@ -33,11 +35,13 @@ public class TestSelectionScript : MonoBehaviour
         {
             case ("SimpleARTest"):
                 description = "\n<size=40>Description:</size>" +
-                    "\n View a simple game object in augmented reality." +
+                    "\n View a simple game object in augmented reality and test Auto Focus" +
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
                     "\n 1) Moving the device updates the camera feed" +
-                    "\n 2) Can walk around and view game object from different angles";
+                    "\n 2) Can walk around and view game object from different angles" +
+                    "\n 3) Can switch between Fixed and Auto camera focus modes" +
+                    "\n 3+) Easiest to tell focus with object directly focused in front of camera";
                 break;
             case ("PoseTrackingTest"):
                 description = "\n<size=40>Description:</size>" +
@@ -100,9 +104,12 @@ public class TestSelectionScript : MonoBehaviour
                     "\n Find a plane and place game objects on them." +
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
-                    "\n 1) Planes are detected" +
+                    "\n 1) Vertical and Horizontal planes are detected" +
 					"\n 2) Tapping on plane places a game object that faces the screen" +
-                    "\n 3) Tapping on the 'toggle plane' button enables and disables plane creation";
+                    "\n 3) Tapping on the 'toggle plane' button enables and disables plane creation" +
+                    "\n 4) Toggle the plane detection drop down -" +
+                    "\n 5) Vertical option only finds vertical planes, Horizontal only finds Horizontal planes" +
+                    "\n 6) None option destroys all planes and game objects";
                 break;
             default:
                 description = "\n<size=26>Description:</size>" +
@@ -117,6 +124,22 @@ public class TestSelectionScript : MonoBehaviour
                     "\n 2) Test begins cycling through different camera types" +
                     "\n 3) Test runs for about 1 minutes and 30 seconds" +
                     "\n 4) When test finishes, the subrect camera will leave a red ghost";
+                break;
+            case ("ImageResolutionTest"):
+                description = "\n<size=40>Description:</size>" +
+                    "\n Switch resolutions and ensure device handles them" +
+                    "\n\n" +
+                    "\n<size=40>What to Verify:</size>" +
+                    "\n 1) Click Camera Config and switch resolutions" +
+                    "\n 2) Click Camera Image button to ensure resolution changed";
+                break;
+            case ("EnvironmentProbeScene"):
+                description = "\n<size=40>Description:</size>" +
+                    "\n Ensure environment probes are present on planes" +
+                    "\n\n" +
+                    "\n<size=40>What to Verify:</size>" +
+                    "\n ANDROID) Planes appear and cubes can be put on planes" +
+                    "\n iOS) Planes and Probes appear, and cubes can be put on planes";
                 break;
         }
 
