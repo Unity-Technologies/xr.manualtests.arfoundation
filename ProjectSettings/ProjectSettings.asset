@@ -148,7 +148,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.arfoundation.test
+    Android: com.unitytest.arfoundation
     iOS: com.unity.arfoundationtest
   buildNumber: {}
   AndroidBundleVersionCode: 1
