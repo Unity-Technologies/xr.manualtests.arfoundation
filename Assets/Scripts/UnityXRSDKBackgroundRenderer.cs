@@ -1,44 +1,15 @@
-//-----------------------------------------------------------------------
-// <copyright file="ARCoreBackgroundRenderer.cs" company="Google">
-//
-// Copyright 2017 Google Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-// </copyright>
-//-----------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR;
-
-//// TODO (mtsmall): Consider if this component is the best way to expose background rendering and discuss approach
-//// with Unity.
 
 /// <summary>
 /// Renders the device's camera as a background to the attached Unity camera component.
 /// </summary>
 public class UnityXRSDKBackgroundRenderer : MonoBehaviour
 {
-    /// <summary>
-    /// A material used to render the AR background image.
-    /// </summary>
-    [Tooltip("A material used to render the AR background image.")]
-    //public Material BackgroundMaterial;
-
     public Camera m_Camera;
 
     public UnityEngine.XR.ARFoundation.ARCameraBackground m_BackgroundComponent;
@@ -53,12 +24,6 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
             return;
         }
 
-        //if (BackgroundMaterial == null)
-        //{
-        //    Debug.LogError("ArCameraBackground:: No material assigned.");
-        //    return;
-        //}
-
         m_BackgroundComponent = GetComponent<UnityEngine.XR.ARFoundation.ARCameraBackground>();
 
         if (m_BackgroundComponent == null)
@@ -66,6 +31,8 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
             Debug.LogError("ARBackgroundRender:: Could not retrieve ARBackgroundRenderer Component");
             return;
         }
+
+        ARSubsystemManager.cameraFrameReceived += OnCameraFrameReceived;
     }
 
     private void Update()
@@ -85,6 +52,8 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
                 Debug.Log("Switching to Standard Background");
                 m_BackgroundComponent.enabled = false;
                 m_Camera.clearFlags = clearFlag;
+
+                ARSubsystemManager.cameraSubsystem.Camera = UnityEngine.Camera.current;
             }
             else
             {
@@ -92,6 +61,10 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
                 m_BackgroundComponent.enabled = true;
             }
         }
+    }
+
+    void OnCameraFrameReceived(ARCameraFrameEventArgs eventArgs)
+    {
     }
 }
 
