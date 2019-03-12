@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR;
+using UnityEngine.XR.ARSubsystems;
 
 /// <summary>
 /// Renders the device's camera as a background to the attached Unity camera component.
 /// </summary>
+[RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(ARCameraBackground))]
 public class UnityXRSDKBackgroundRenderer : MonoBehaviour
 {
-    public Camera m_Camera;
+    Camera m_Camera;
 
-    public UnityEngine.XR.ARFoundation.ARCameraBackground m_BackgroundComponent;
+    ARCameraBackground m_BackgroundComponent;
 
     public CameraClearFlags clearFlag = CameraClearFlags.Skybox;
 
@@ -24,15 +27,8 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
             return;
         }
 
-        m_BackgroundComponent = GetComponent<UnityEngine.XR.ARFoundation.ARCameraBackground>();
-
-        if (m_BackgroundComponent == null)
-        {
-            Debug.LogError("ARBackgroundRender:: Could not retrieve ARBackgroundRenderer Component");
-            return;
-        }
-
-        ARSubsystemManager.cameraFrameReceived += OnCameraFrameReceived;
+        m_BackgroundComponent = GetComponent<ARCameraBackground>();
+        m_Camera = GetComponent<Camera>();
     }
 
     private void Update()
@@ -53,7 +49,7 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
                 m_BackgroundComponent.enabled = false;
                 m_Camera.clearFlags = clearFlag;
 
-                ARSubsystemManager.cameraSubsystem.Camera = UnityEngine.Camera.current;
+                //ARSubsystemManager.cameraSubsystem.Camera = UnityEngine.Camera.current;
             }
             else
             {
@@ -61,10 +57,6 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
                 m_BackgroundComponent.enabled = true;
             }
         }
-    }
-
-    void OnCameraFrameReceived(ARCameraFrameEventArgs eventArgs)
-    {
     }
 }
 

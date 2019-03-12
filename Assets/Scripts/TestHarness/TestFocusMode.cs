@@ -1,23 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARExtensions;
-using UnityEngine.Experimental.XR;
+using UnityEngine.XR.ARSubsystems;
 
 public class TestFocusMode : MonoBehaviour
 {
     [SerializeField]
-    ARCameraOptions m_ARCameraOptions;
+    ARCameraManager m_ARCameraManager;
 
     public void DoGUI()
     {
-        ButtonManager.AddButton("Focus Mode: " + m_ARCameraOptions.focusMode, () =>
+        ButtonManager.AddButton("Focus Mode: " + m_ARCameraManager.focusMode, () =>
         {
-            if (m_ARCameraOptions.focusMode == CameraFocusMode.Fixed)
-                m_ARCameraOptions.focusMode = CameraFocusMode.Auto;
+            if (m_ARCameraManager.focusMode == CameraFocusMode.Fixed)
+                m_ARCameraManager.focusMode = CameraFocusMode.Auto;
             else
-                m_ARCameraOptions.focusMode = CameraFocusMode.Fixed;
+                m_ARCameraManager.focusMode = CameraFocusMode.Fixed;
         });
     }
 }

@@ -1,31 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.XR;
 using UnityEngine.AI;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
-[RequireComponent(typeof(ARSessionOrigin))]
+[RequireComponent(typeof(ARRaycastManager))]
 public class NavMeshTest : MonoBehaviour
 {
     [SerializeField]
     private GameObject m_ObjectToPlace;
 
-    private ARSessionOrigin m_Origin;
+    ARRaycastManager m_RaycastManager;
+
     private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
     private bool objectSpawned = false;
     private GameObject spawnedObject;
     private ARPlaneManager planeManager;
 
-    // Use this for initialization
-    void Start()
-    {
-        m_Origin = GetComponent<ARSessionOrigin>();
-    }
-
     void OnEnable()
     {
         planeManager = GetComponent<ARPlaneManager>();
+        m_RaycastManager = GetComponent<ARRaycastManager>();
 
         if (planeManager != null)
             RegisterPlaneCallbacks();
@@ -40,10 +35,7 @@ public class NavMeshTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_Origin == null)
-            return;
-
-        if (m_Origin.camera == null)
+        if (m_RaycastManager == null)
             return;
 
         if (m_ObjectToPlace == null)
@@ -51,7 +43,7 @@ public class NavMeshTest : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (m_Origin.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
+            if (m_RaycastManager.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
             {
                 if (!objectSpawned)
                 {
@@ -93,41 +85,28 @@ public class NavMeshTest : MonoBehaviour
     }
     void RegisterPlaneCallbacks()
     {
-        Debug.Log("RegisterPlaneCallbacks");
-        planeManager.planeAdded += PlaneAddedHandler;
-        planeManager.planeUpdated += PlaneUpdatedHandler;
-        planeManager.planeRemoved += PlaneRemovedHandler;
+        Debug.Log("RegisterPlaneCallback");
+        planeManager.planesChanged += PlanesChangedHandler;
     }
 
     void UnregisterPlaneCallbacks()
     {
-        Debug.Log("UnregisterPlaneCallbacks");
-        planeManager.planeAdded -= PlaneAddedHandler;
-        planeManager.planeUpdated -= PlaneUpdatedHandler;
-        planeManager.planeRemoved -= PlaneRemovedHandler;
+        Debug.Log("UnregisterPlaneCallback");
+        planeManager.planesChanged -= PlanesChangedHandler;
     }
 
-    void PlaneAddedHandler(ARPlaneAddedEventArgs args)
+    void PlanesChangedHandler(ARPlanesChangedEventArgs eventArgs)
     {
-        UpdatePlane(args.plane.gameObject);
-        args.plane.gameObject.AddComponent<NavMeshSurface>();
-        args.plane.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
-        Debug.Log(args.plane.gameObject.GetComponent<NavMeshSurface>().navMeshData.sourceBounds.ToString());
-    }
+        foreach (var plane in eventArgs.added)
+        {
+            plane.gameObject.AddComponent<NavMeshSurface>();
+            plane.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+            Debug.Log(plane.gameObject.GetComponent<NavMeshSurface>().navMeshData.sourceBounds.ToString());
+        }
 
-    void PlaneUpdatedHandler(ARPlaneUpdatedEventArgs args)
-    {
-        UpdatePlane(args.plane.gameObject);
-        args.plane.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
-    }
-
-    void PlaneRemovedHandler(ARPlaneRemovedEventArgs args)
-    {
-
-    }
-
-    void UpdatePlane(GameObject plane)
-    {
-
+        foreach (var plane in eventArgs.updated)
+        {
+            plane.gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+        }
     }
 }

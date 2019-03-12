@@ -32,10 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlaneDetectionTest.unity
     guid: a1fbd3791f34edc46bd3173170c35df2
-  - enabled: 1
-    path: Assets/Scenes/CameraImageApiTester.unity
-    guid: 442cedb49766af641b008f76347ac2b5
-  - enabled: 1
-    path: Assets/Scenes/ImageResolutionTest.unity
-    guid: 80155df80078edd49917c7c56af919be
   m_configObjects: {}

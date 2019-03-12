@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.Experimental.XR;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(typeof(ARPlaneManager))]
 
 
 public class PlaneDetectionTest : MonoBehaviour
 {
-
     enum PlaneType
     {
         None,
@@ -18,13 +16,15 @@ public class PlaneDetectionTest : MonoBehaviour
         Vertical
     };
 
-
     [SerializeField]
     private GameObject m_ObjectToPlace;
+
     [SerializeField]
     public Dropdown planeDropDown;
 
     private ARSessionOrigin m_Origin;
+    private ARRaycastManager m_RaycastManager;
+
     private ARPlaneManager m_PlaneManager;
     private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
 
@@ -32,19 +32,14 @@ public class PlaneDetectionTest : MonoBehaviour
 
     private PlaneType currentPlaneType = PlaneType.None;
 
-
-
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         m_Origin = GetComponent<ARSessionOrigin>();
+        m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
-        m_PlaneManager.detectionFlags = UnityEngine.XR.ARExtensions.PlaneDetectionFlags.None;
-        Debug.Log(m_PlaneManager.detectionFlags.ToString());
+        m_PlaneManager.detectionMode = PlaneDetectionMode.None;
+        Debug.Log(m_PlaneManager.detectionMode.ToString());
 
         planeDropDown.onValueChanged.AddListener(delegate
         {
@@ -54,21 +49,11 @@ public class PlaneDetectionTest : MonoBehaviour
 
         planeDropDown.RefreshShownValue();
         currentPlaneType = (PlaneType)planeDropDown.value;
-
     }
-
-
-
-    
-
 
     // Update is called once per frame
     void Update()
     {
-
-
-
-
         if (m_Origin.camera == null)
             return;
 
@@ -80,7 +65,7 @@ public class PlaneDetectionTest : MonoBehaviour
             
             // Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             // if (m_Session.Raycast(ray, m_RaycastHits, TrackableType.PlaneWithinPolygon))
-            if (m_Origin.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
+            if (m_RaycastManager.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
             {
                 Debug.LogFormat("Hit Position: {0}", m_RaycastHits[0].pose);
 
@@ -95,15 +80,9 @@ public class PlaneDetectionTest : MonoBehaviour
                 placedOjbect.transform.Rotate(-90, 0, 90, Space.Self);
 
                 UnityLogoObjects.Add(placedOjbect);
-
-
             }
-
-
         }
     }
-
-
 
     void DestroyGameObject()
     {
@@ -111,16 +90,10 @@ public class PlaneDetectionTest : MonoBehaviour
         {
             Destroy(logo);
         }
-
     }
-
-
-
-
 
     void DropdownValueChanged(Dropdown change)
     {
-
         Debug.Log("Dropdown Value");
         currentPlaneType = (PlaneType)change.value;
         planeDropDown.RefreshShownValue();
@@ -130,10 +103,9 @@ public class PlaneDetectionTest : MonoBehaviour
             case PlaneType.Horizontal:
                 {
                     Debug.Log("Changing plane flags to horizontal");
-                    
-                    m_PlaneManager.detectionFlags = UnityEngine.XR.ARExtensions.PlaneDetectionFlags.Horizontal;
-                    Debug.Log(m_PlaneManager.detectionFlags.ToString());
 
+                    m_PlaneManager.detectionMode = PlaneDetectionMode.Horizontal;
+                    Debug.Log(m_PlaneManager.detectionMode.ToString());
 
                     break;
                 }
@@ -142,8 +114,8 @@ public class PlaneDetectionTest : MonoBehaviour
                 {
                     Debug.Log("Changing plane flags to vertical");
 
-                    m_PlaneManager.detectionFlags = UnityEngine.XR.ARExtensions.PlaneDetectionFlags.Vertical;
-                    Debug.Log(m_PlaneManager.detectionFlags.ToString());
+                    m_PlaneManager.detectionMode = PlaneDetectionMode.Vertical;
+                    Debug.Log(m_PlaneManager.detectionMode.ToString());
 
                     break;
                 }
@@ -152,8 +124,8 @@ public class PlaneDetectionTest : MonoBehaviour
                 {
                     Debug.Log("Changing plane flags to None");
 
-                    m_PlaneManager.detectionFlags = UnityEngine.XR.ARExtensions.PlaneDetectionFlags.None;
-                    Debug.Log(m_PlaneManager.detectionFlags.ToString());
+                    m_PlaneManager.detectionMode = PlaneDetectionMode.None;
+                    Debug.Log(m_PlaneManager.detectionMode.ToString());
 
                     break;
                 }
@@ -161,8 +133,4 @@ public class PlaneDetectionTest : MonoBehaviour
         DestroyGameObject();
         UnityLogoObjects.Clear();
     }
-
-
 }
-
-

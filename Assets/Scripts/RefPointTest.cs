@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.Experimental.XR;
 using UnityEngine.UI;
-
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(typeof(ARReferencePointManager))]
+[RequireComponent(typeof(ARRaycastManager))]
+[RequireComponent(typeof(ARPlaneManager))]
 public class RefPointTest : MonoBehaviour
 {
     enum ReferencePointType
@@ -17,17 +17,19 @@ public class RefPointTest : MonoBehaviour
     };
 
     [SerializeField]
-    private GameObject m_PoseObject;
-    [SerializeField]
-    private GameObject m_PlaneObject;
-    [SerializeField]
-    private Dropdown refPointDropDown;
+    GameObject m_PoseObject;
 
-    private ReferencePointType currentRefPointType = ReferencePointType.None;
+    [SerializeField]
+    GameObject m_PlaneObject;
+
+    [SerializeField]
+    Dropdown refPointDropDown;
+
+    ReferencePointType currentRefPointType = ReferencePointType.None;
 
     private ARReferencePointManager m_RefManager;
-    private ARSessionOrigin m_Origin;
-    private ARPlaneManager m_planeManager;
+    private ARRaycastManager m_RaycastManager;
+    private ARPlaneManager m_PlaneManager;
     private List<ARReferencePoint> m_TrackableIds = new List<ARReferencePoint>();
     private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
     private Dictionary<ARReferencePoint, GameObject> m_pointDictionary = new Dictionary<ARReferencePoint, GameObject>();
@@ -36,14 +38,14 @@ public class RefPointTest : MonoBehaviour
     void Start()
     {
         m_RefManager = GetComponent<ARReferencePointManager>();
-        m_Origin = GetComponent<ARSessionOrigin>();
+        m_RaycastManager = GetComponent<ARRaycastManager>();
 
         refPointDropDown.onValueChanged.AddListener(delegate
         {
             DropdownValueChanged(refPointDropDown);
         });
 
-        m_planeManager = gameObject.GetComponent<ARPlaneManager>();
+        m_PlaneManager = gameObject.GetComponent<ARPlaneManager>();
 
         refPointDropDown.RefreshShownValue();
         currentRefPointType = (ReferencePointType)refPointDropDown.value;
@@ -55,17 +57,13 @@ public class RefPointTest : MonoBehaviour
         if (m_RefManager == null)
             return;
 
-        if (m_Origin.camera == null)
-            return;
-        
         if (m_PoseObject == null || m_PlaneObject == null)
             return;
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (m_Origin.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
+            if (m_RaycastManager.Raycast(Input.mousePosition, m_RaycastHits, TrackableType.PlaneWithinBounds))
             {
-
                 Debug.LogFormat("Hit Position: {0}", m_RaycastHits[0].pose);
 
                 switch (currentRefPointType)
@@ -74,7 +72,7 @@ public class RefPointTest : MonoBehaviour
                         {
                             Debug.Log("Adding Pose Reference Point");
 
-                            ARReferencePoint tempPoint = m_RefManager.TryAddReferencePoint(m_RaycastHits[0].pose);
+                            ARReferencePoint tempPoint = m_RefManager.AddReferencePoint(m_RaycastHits[0].pose);
                             m_pointDictionary.Add(tempPoint, Instantiate(m_PoseObject, m_RaycastHits[0].pose.position, m_RaycastHits[0].pose.rotation));
                             m_TrackableIds.Add(tempPoint);
 
@@ -85,9 +83,9 @@ public class RefPointTest : MonoBehaviour
                             Debug.Log("Adding Plane Reference Point");
 
                             TrackableId tempId = m_RaycastHits[0].trackableId;
-                            ARPlane tempPlane = m_planeManager.TryGetPlane(tempId);
+                            ARPlane tempPlane = m_PlaneManager.GetPlane(tempId);
 
-                            ARReferencePoint tempPoint = m_RefManager.TryAttachReferencePoint(tempPlane, m_RaycastHits[0].pose);
+                            ARReferencePoint tempPoint = m_RefManager.AttachReferencePoint(tempPlane, m_RaycastHits[0].pose);
                             m_pointDictionary.Add(tempPoint, Instantiate(m_PlaneObject, m_RaycastHits[0].pose.position, m_RaycastHits[0].pose.rotation));
 
                             return;
@@ -122,7 +120,7 @@ public class RefPointTest : MonoBehaviour
 
         foreach(ARReferencePoint point in tempTrackableList)
         {
-            refPointRemoved = m_RefManager.TryRemoveReferencePoint(point);
+            refPointRemoved = m_RefManager.RemoveReferencePoint(point);
 
             if (!refPointRemoved)
             {

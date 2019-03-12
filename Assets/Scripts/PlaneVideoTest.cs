@@ -1,43 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.XR.ARFoundation;
+﻿using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.XR.ARFoundation;
 
+[RequireComponent(typeof(ARPlaneManager))]
 public class PlaneVideoTest : MonoBehaviour
 {
+    ARPlaneManager m_PlaneManager;
+    VideoPlayer m_VideoPlayer;
+    GameObject m_ARRig;
 
-    ARPlaneManager planeManager;
-    VideoPlayer vPlayer;
-    GameObject arRig;
-    
-    List<ARPlane> foundPlanes = new List<ARPlane>();
-
-	// Use this for initialization
-	void Start () {
-        planeManager = GetComponent<ARPlaneManager>();
-        arRig = GameObject.Find("AR Rig");
-        vPlayer = arRig.GetComponent<VideoPlayer>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    // Use this for initialization
+    void Start ()
     {
-		
-	}
+        m_PlaneManager = GetComponent<ARPlaneManager>();
+        m_ARRig = GameObject.Find("AR Rig");
+        m_VideoPlayer = m_ARRig.GetComponent<VideoPlayer>();
+    }
 
     public void AttachVideoPlayer()
     {
-        if (!vPlayer.enabled)
+        if (!m_VideoPlayer.enabled)
         {
-            planeManager.GetAllPlanes(foundPlanes);
-            Debug.Log(planeManager.planeCount);
+            var planes = m_PlaneManager.trackables;
+            Debug.Log(planes.count);
 
-            vPlayer.targetMaterialRenderer = foundPlanes[0].GetComponent<MeshRenderer>();
-            vPlayer.targetMaterialProperty = "_MainTex";
-            if (vPlayer.targetMaterialRenderer != null)
+            ARPlane foundPlane = null;
+            foreach (var plane in planes)
             {
-                vPlayer.enabled = true;
+                foundPlane = plane;
+                break;
+            }
+
+            if (foundPlane != null)
+            {
+                m_VideoPlayer.targetMaterialRenderer = foundPlane.GetComponent<MeshRenderer>();
+                m_VideoPlayer.targetMaterialProperty = "_MainTex";
+                if (m_VideoPlayer.targetMaterialRenderer != null)
+                {
+                    m_VideoPlayer.enabled = true;
+                }
             }
         }
     }
