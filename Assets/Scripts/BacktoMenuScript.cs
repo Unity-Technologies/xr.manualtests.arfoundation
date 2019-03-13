@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 
 public class BacktoMenuScript : MonoBehaviour {
 
-    private float holdTime = 1.0f;
-    private float acumTime = 0;
+    float holdTime = 1.0f;
+    float acumTime = 0;
 
 	// Use this for initialization
 	void Start () {

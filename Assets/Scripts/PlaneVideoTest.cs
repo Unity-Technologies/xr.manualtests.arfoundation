@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
 using UnityEngine.Video;
+using UnityEngine.XR.ARFoundation;
 
 public class PlaneVideoTest : MonoBehaviour
 {
@@ -18,12 +17,6 @@ public class PlaneVideoTest : MonoBehaviour
         planeManager = GetComponent<ARPlaneManager>();
         arRig = GameObject.Find("AR Rig");
         vPlayer = arRig.GetComponent<VideoPlayer>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
 	}
 
     public void AttachVideoPlayer()

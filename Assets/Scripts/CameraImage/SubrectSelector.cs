@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.ARExtensions;
-using UnityEngine.XR.ARFoundation;
 
 [RequireComponent(typeof(LineRenderer))]
 public class SubrectSelector : MonoBehaviour
@@ -38,7 +35,7 @@ public class SubrectSelector : MonoBehaviour
             width, height);
     }
 
-    private void Start()
+    void Start()
     {
         SetPosition(Vector3.zero);
     }

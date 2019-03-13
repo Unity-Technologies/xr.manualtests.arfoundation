@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
 using UnityEngine.UI;
-
+using UnityEngine.XR.ARFoundation;
 
 [RequireComponent(typeof(ARReferencePointManager))]
 public class RefPointTest : MonoBehaviour
@@ -17,20 +15,22 @@ public class RefPointTest : MonoBehaviour
     };
 
     [SerializeField]
-    private GameObject m_PoseObject;
-    [SerializeField]
-    private GameObject m_PlaneObject;
-    [SerializeField]
-    private Dropdown refPointDropDown;
+    GameObject m_PoseObject;
 
-    private ReferencePointType currentRefPointType = ReferencePointType.None;
+    [SerializeField]
+    GameObject m_PlaneObject;
 
-    private ARReferencePointManager m_RefManager;
-    private ARSessionOrigin m_Origin;
-    private ARPlaneManager m_planeManager;
-    private List<ARReferencePoint> m_TrackableIds = new List<ARReferencePoint>();
-    private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
-    private Dictionary<ARReferencePoint, GameObject> m_pointDictionary = new Dictionary<ARReferencePoint, GameObject>();
+    [SerializeField]
+    Dropdown refPointDropDown;
+
+    ReferencePointType currentRefPointType = ReferencePointType.None;
+
+    ARReferencePointManager m_RefManager;
+    ARSessionOrigin m_Origin;
+    ARPlaneManager m_planeManager;
+    List<ARReferencePoint> m_TrackableIds = new List<ARReferencePoint>();
+    List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
+    Dictionary<ARReferencePoint, GameObject> m_pointDictionary = new Dictionary<ARReferencePoint, GameObject>();
 
     // Use this for initialization
     void Start()

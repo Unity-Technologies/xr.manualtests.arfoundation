@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TestSelectionScript : MonoBehaviour
@@ -49,7 +47,7 @@ public class TestSelectionScript : MonoBehaviour
                     "\n\n" +
                     "\n<size=40>What to Verify:</size>" +
                     "\n 1) Walk around an area and then point the device where you walked: \n you should see a general trail of where you have been" +
-                    "\n 2) The trail will not be exact, but there should be no drift \n occuring (trail moves without you moving the phone)";
+                    "\n 2) The trail will not be exact, but there should be no drift \n occurring (trail moves without you moving the phone)";
                 break;
             case ("MagicWindowTest"):
                 description = "\n<size=40>Description:</size>" +
@@ -124,6 +122,7 @@ public class TestSelectionScript : MonoBehaviour
                     "\n 2) Test begins cycling through different camera types" +
                     "\n 3) Test runs for about 1 minutes and 30 seconds" +
                     "\n 4) When test finishes, the subrect camera will leave a red ghost";
+                Screen.orientation = ScreenOrientation.LandscapeRight;
                 break;
             case ("ImageResolutionTest"):
                 description = "\n<size=40>Description:</size>" +
@@ -153,5 +152,10 @@ public class TestSelectionScript : MonoBehaviour
     {
         TestSceneLoader loader = Camera.main.GetComponent<TestSceneLoader>();
         loader.ChangeScene(m_SceneName);
+    }
+
+    void Start()
+    {
+        Screen.orientation = ScreenOrientation.AutoRotation;
     }
 }

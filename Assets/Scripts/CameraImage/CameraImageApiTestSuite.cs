@@ -2,9 +2,9 @@
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARExtensions;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(SubrectSelector))]
 public class CameraImageApiTestSuite : MonoBehaviour

@@ -1,9 +1,5 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR;
 
 /// <summary>
 /// Renders the device's camera as a background to the attached Unity camera component.
@@ -16,7 +12,7 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
 
     public CameraClearFlags clearFlag = CameraClearFlags.Skybox;
 
-    private void OnEnable()
+    void OnEnable()
     {
         if (Application.isEditor)
         {
@@ -35,7 +31,7 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
         ARSubsystemManager.cameraFrameReceived += OnCameraFrameReceived;
     }
 
-    private void Update()
+    void Update()
     {
         if (m_BackgroundComponent == null)
         {
@@ -62,7 +58,6 @@ public class UnityXRSDKBackgroundRenderer : MonoBehaviour
             }
         }
     }
-
     void OnCameraFrameReceived(ARCameraFrameEventArgs eventArgs)
     {
     }

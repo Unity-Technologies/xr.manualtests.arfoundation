@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 [RequireComponent(typeof(ARPlaneManager))]
-
 
 public class PlaneDetectionTest : MonoBehaviour
 {
@@ -18,25 +16,17 @@ public class PlaneDetectionTest : MonoBehaviour
         Vertical
     };
 
-
     [SerializeField]
-    private GameObject m_ObjectToPlace;
+    GameObject m_ObjectToPlace;
+
     [SerializeField]
     public Dropdown planeDropDown;
 
-    private ARSessionOrigin m_Origin;
-    private ARPlaneManager m_PlaneManager;
-    private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
-
+    ARSessionOrigin m_Origin;
+    ARPlaneManager m_PlaneManager;
+    PlaneType currentPlaneType = PlaneType.None;
+    List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
     List<GameObject> UnityLogoObjects = new List<GameObject>();
-
-    private PlaneType currentPlaneType = PlaneType.None;
-
-
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -51,24 +41,13 @@ public class PlaneDetectionTest : MonoBehaviour
             DropdownValueChanged(planeDropDown);
         });
         
-
         planeDropDown.RefreshShownValue();
         currentPlaneType = (PlaneType)planeDropDown.value;
-
     }
-
-
-
-    
-
 
     // Update is called once per frame
     void Update()
     {
-
-
-
-
         if (m_Origin.camera == null)
             return;
 
@@ -95,15 +74,9 @@ public class PlaneDetectionTest : MonoBehaviour
                 placedOjbect.transform.Rotate(-90, 0, 90, Space.Self);
 
                 UnityLogoObjects.Add(placedOjbect);
-
-
             }
-
-
         }
     }
-
-
 
     void DestroyGameObject()
     {
@@ -111,16 +84,10 @@ public class PlaneDetectionTest : MonoBehaviour
         {
             Destroy(logo);
         }
-
     }
-
-
-
-
 
     void DropdownValueChanged(Dropdown change)
     {
-
         Debug.Log("Dropdown Value");
         currentPlaneType = (PlaneType)change.value;
         planeDropDown.RefreshShownValue();
@@ -161,8 +128,6 @@ public class PlaneDetectionTest : MonoBehaviour
         DestroyGameObject();
         UnityLogoObjects.Clear();
     }
-
-
 }
 
 

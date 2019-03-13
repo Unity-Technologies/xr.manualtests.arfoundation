@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.XR.ARFoundation;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 public class PlaneRemover : MonoBehaviour
 {
@@ -15,10 +13,8 @@ public class PlaneRemover : MonoBehaviour
         if (planeManager != null)
         {
             planeManager.enabled = !planeManager.enabled;
-            status.text = "Plane enabaled: " + planeManager.enabled.ToString();
+            status.text = "Plane enabled: " + planeManager.enabled.ToString();
             Debug.Log("PlaneRemove button hit");
         }
     }
-
-
 }

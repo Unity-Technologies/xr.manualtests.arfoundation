@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.ARExtensions;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.UI;
-
 
 public class ToggleAutoFocus : MonoBehaviour
 {
@@ -15,9 +11,7 @@ public class ToggleAutoFocus : MonoBehaviour
     {
         aRCameraOptions = GetComponent<ARCameraOptions>();
     }
-
-
-
+    
     public void ToggleFocusButton(int option) 
     {
 
@@ -27,6 +21,4 @@ public class ToggleAutoFocus : MonoBehaviour
             Debug.Log("AutoFocus Button Hit");
         }
     }
-
-
 }
