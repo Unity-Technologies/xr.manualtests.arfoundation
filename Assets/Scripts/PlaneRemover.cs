@@ -15,10 +15,8 @@ public class PlaneRemover : MonoBehaviour
         if (planeManager != null)
         {
             planeManager.enabled = !planeManager.enabled;
-            status.text = "Plane enabaled: " + planeManager.enabled.ToString();
+            status.text = "Plane enabled: " + planeManager.enabled.ToString();
             Debug.Log("PlaneRemove button hit");
         }
     }
-
-
 }

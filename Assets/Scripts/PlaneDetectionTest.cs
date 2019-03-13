@@ -102,7 +102,7 @@ public class PlaneDetectionTest : MonoBehaviour
         {
             case PlaneType.Horizontal:
                 {
-                    Debug.Log("Changing plane flags to horizontal");
+                    Debug.Log("Changing plane mode to horizontal");
 
                     m_PlaneManager.detectionMode = PlaneDetectionMode.Horizontal;
                     Debug.Log(m_PlaneManager.detectionMode.ToString());
@@ -112,7 +112,7 @@ public class PlaneDetectionTest : MonoBehaviour
 
             case PlaneType.Vertical:
                 {
-                    Debug.Log("Changing plane flags to vertical");
+                    Debug.Log("Changing plane mode to vertical");
 
                     m_PlaneManager.detectionMode = PlaneDetectionMode.Vertical;
                     Debug.Log(m_PlaneManager.detectionMode.ToString());
@@ -122,7 +122,7 @@ public class PlaneDetectionTest : MonoBehaviour
 
             case PlaneType.None:
                 {
-                    Debug.Log("Changing plane flags to None");
+                    Debug.Log("Changing plane mode to None");
 
                     m_PlaneManager.detectionMode = PlaneDetectionMode.None;
                     Debug.Log(m_PlaneManager.detectionMode.ToString());

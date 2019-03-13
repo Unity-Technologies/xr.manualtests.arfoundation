@@ -12,21 +12,17 @@ public class BackCatcher : MonoBehaviour
 
     public void Update()
     {
-
         if (Application.platform == RuntimePlatform.Android)
         {
-
             if (Input.GetKeyUp(KeyCode.Escape))
             {
                 Screen.orientation = ScreenOrientation.AutoRotation;
-                //quit application on return button
+                //Quit application on return button
                 GetComponentInChildren<ARCameraBackground>().enabled = false;
                 SceneManager.LoadScene("TestSelection");
 
                 return;
-
             }
-
         }
 
 
@@ -46,7 +42,5 @@ public class BackCatcher : MonoBehaviour
                 acumTime = 0;
             }
         }
-
     }
-
 }
