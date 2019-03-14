@@ -1,21 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.XR;
 using UnityEngine.AI;
+using UnityEngine.Experimental.XR;
 using UnityEngine.XR.ARFoundation;
 
 [RequireComponent(typeof(ARSessionOrigin))]
+
 public class NavMeshTest : MonoBehaviour
 {
     [SerializeField]
-    private GameObject m_ObjectToPlace;
+    GameObject m_ObjectToPlace;
 
-    private ARSessionOrigin m_Origin;
-    private List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
-    private bool objectSpawned = false;
-    private GameObject spawnedObject;
-    private ARPlaneManager planeManager;
+    ARSessionOrigin m_Origin;
+    List<ARRaycastHit> m_RaycastHits = new List<ARRaycastHit>();
+    bool objectSpawned = false;
+    GameObject spawnedObject;
+    ARPlaneManager planeManager;
 
     // Use this for initialization
     void Start()
@@ -65,7 +65,6 @@ public class NavMeshTest : MonoBehaviour
 
                         spawnedObject.transform.position = closestHit.position;
                         spawnedObject.AddComponent<NavMeshAgent>();
-                        //spawnedObject.GetComponent<NavMeshAgent>().radius = .1f;
                         spawnedObject.GetComponent<NavMeshAgent>().Warp(m_RaycastHits[0].pose.position);
                         if (spawnedObject.GetComponent<NavMeshAgent>().isOnNavMesh == true)
                         {

@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 
 public class BackCatcher : MonoBehaviour
 {
 
-    private float holdTime = 1.0f;
-    private float acumTime = 0;
+    float holdTime = 1.0f;
+    float acumTime = 0;
 
     public void Update()
     {
@@ -26,9 +24,7 @@ public class BackCatcher : MonoBehaviour
                 return;
 
             }
-
         }
-
 
         if (Input.touchCount > 0)
         {
@@ -46,7 +42,5 @@ public class BackCatcher : MonoBehaviour
                 acumTime = 0;
             }
         }
-
     }
-
 }

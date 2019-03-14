@@ -106,7 +106,7 @@ PlayerSettings:
   xboxOneDisableEsram: 0
   xboxOnePresentImmediateThreshold: 0
   switchQueueCommandMemory: 0
-  switchQueueControlMemory: 0
+  switchQueueControlMemory: 16384
   switchQueueComputeMemory: 262144
   switchNVNShaderPoolsGranularity: 33554432
   switchNVNDefaultPoolsGranularity: 16777216
@@ -159,7 +159,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.arfoundation.test
+    Android: com.unitytest.arfoundation
     iPhone: com.unity.arfoundationtest
   buildNumber: {}
   AndroidBundleVersionCode: 1
@@ -701,7 +701,7 @@ PlayerSettings:
     m_PortalFolderPath: 
   luminCert:
     m_CertPath: 
-    m_PrivateKeyPath: 
+    m_SignPackage: 1
   luminIsChannelApp: 0
   luminVersion:
     m_VersionCode: 1
